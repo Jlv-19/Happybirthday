@@ -1,54 +1,69 @@
-document.getElementById("btn").addEventListener("click", () => {
-    document.getElementById("message").style.display = "block";
-});
-// YYYY, Month (0-11), Day, Hour, Minute, Second
-const birthday = new Date(2026, 9, 9, 23, 59, 59);
+document.addEventListener("DOMContentLoaded", () => {
 
-const days = document.getElementById("days");
-const hours = document.getElementById("hours");
-const minutes = document.getElementById("minutes");
-const seconds = document.getElementById("seconds");
-const message = document.getElementById("countdown-message");
+    // ==========================
+    // Surprise Button
+    // ==========================
+    const btn = document.getElementById("btn");
+    const surpriseMessage = document.getElementById("message");
 
-function updateCountdown(){
-
-    const now = new Date();
-
-    let diff = birthday - now;
-
-    if(diff <= 0){
-
-        document.querySelector(".countdown-container").innerHTML = `
-            <h1 style="font-size:3rem;">
-                🎉 Happy Birthday! 🎂❤️
-            </h1>
-        `;
-
-        message.innerHTML =
-            "Today is your special day. Wishing you happiness, love and endless smiles.";
-
-        clearInterval(timer);
-
-        return;
+    if (btn && surpriseMessage) {
+        btn.addEventListener("click", () => {
+            surpriseMessage.style.display = "block";
+        });
     }
 
-    const d = Math.floor(diff / (1000*60*60*24));
-    diff %= (1000*60*60*24);
+    // ==========================
+    // Birthday Countdown
+    // Birthday: October 10, 2026
+    // ==========================
+    const birthday = new Date("2026-10-10T00:00:00");
 
-    const h = Math.floor(diff / (1000*60*60));
-    diff %= (1000*60*60);
+    const days = document.getElementById("days");
+    const hours = document.getElementById("hours");
+    const minutes = document.getElementById("minutes");
+    const seconds = document.getElementById("seconds");
+    const countdownMessage = document.getElementById("countdown-message");
+    const countdownContainer = document.querySelector(".countdown-container");
 
-    const m = Math.floor(diff / (1000*60));
-    diff %= (1000*60);
+    function updateCountdown() {
 
-    const s = Math.floor(diff / 1000);
+        const now = new Date();
+        const diff = birthday.getTime() - now.getTime();
 
-    days.textContent = String(d).padStart(2,'0');
-    hours.textContent = String(h).padStart(2,'0');
-    minutes.textContent = String(m).padStart(2,'0');
-    seconds.textContent = String(s).padStart(2,'0');
-}
+        if (diff <= 0) {
 
-updateCountdown();
+            if (countdownContainer) {
+                countdownContainer.innerHTML = `
+                    <h1 style="font-size:3rem;">
+                        🎉 Happy Birthday! 🎂❤️
+                    </h1>
+                `;
+            }
 
-const timer = setInterval(updateCountdown,1000);
+            if (countdownMessage) {
+                countdownMessage.textContent =
+                    "Today is your special day. Wishing you endless happiness, love, and beautiful memories.";
+            }
+
+            clearInterval(timer);
+            return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+
+        const d = Math.floor(totalSeconds / (60 * 60 * 24));
+        const h = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+        const m = Math.floor((totalSeconds % (60 * 60)) / 60);
+        const s = totalSeconds % 60;
+
+        if (days) days.textContent = String(d).padStart(2, "0");
+        if (hours) hours.textContent = String(h).padStart(2, "0");
+        if (minutes) minutes.textContent = String(m).padStart(2, "0");
+        if (seconds) seconds.textContent = String(s).padStart(2, "0");
+    }
+
+    updateCountdown();
+
+    const timer = setInterval(updateCountdown, 1000);
+
+});
