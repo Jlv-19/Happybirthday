@@ -2,7 +2,7 @@ document.getElementById("btn").addEventListener("click", () => {
     document.getElementById("message").style.display = "block";
 });
 // YYYY, Month (0-11), Day, Hour, Minute, Second
-const birthday = new Date(2027, 2, 15, 0, 0, 0);
+const birthday = new Date(2027, 10, 10, 0, 0, 0);
 
 const days = document.getElementById("days");
 const hours = document.getElementById("hours");
