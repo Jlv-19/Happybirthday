@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Birthday Countdown
     // Birthday: October 10, 2026
     // ==========================
-    const birthday = new Date("2026-10-10T00:00:00");
+    const birthday = new Date("2027-10-23T00:00:00");
 
     const days = document.getElementById("days");
     const hours = document.getElementById("hours");
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (countdownContainer) {
                 countdownContainer.innerHTML = `
                     <h1 style="font-size:3rem;">
-                        🎉 Happy Birthday! 🎂❤️
+                        Time to get Settle Down
                     </h1>
                 `;
             }
